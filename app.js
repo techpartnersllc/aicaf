@@ -6,6 +6,20 @@
 (function () {
   'use strict';
 
+  /* ---------------- Analytics ----------------
+     Fires GA4 events if gtag() is loaded (see index.html <head> — requires a
+     real Measurement ID to actually report data). Safe no-op otherwise, so
+     the app never breaks if analytics is blocked, missing, or not yet set up. */
+  function trackEvent(name, params) {
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', name, params || {});
+      }
+    } catch (e) {
+      /* never let analytics break the app */
+    }
+  }
+
   /* ---------------- Theme ---------------- */
   const root = document.documentElement;
   const themeToggle = document.getElementById('theme-toggle');
@@ -218,6 +232,7 @@
     generateBtn.classList.toggle('hidden', step !== TOTAL_STEPS);
     if (step === TOTAL_STEPS) renderReview();
     renderProgress();
+    trackEvent('wizard_step_view', { step_number: step, step_name: STEP_NAMES[step] });
     document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -261,8 +276,14 @@
     document.getElementById('intro').classList.add('hidden');
     document.getElementById('wizard').classList.remove('hidden');
     currentStep = 1;
+    trackEvent('assessment_start');
     showStep(currentStep);
   });
+
+  const ctaTalkBtn = document.getElementById('cta-talk-btn');
+  if (ctaTalkBtn) {
+    ctaTalkBtn.addEventListener('click', () => trackEvent('cta_lets_talk_clicked'));
+  }
 
   /* ---------------- Review ---------------- */
   function label(list, id) {
@@ -663,6 +684,7 @@
             <ol>${govSources.map((r) => `<li><a href="${r.url}" target="_blank" rel="noopener">${r.name}</a> — ${r.org}</li>`).join('')}</ol>
           </div>
         </div>
+        <p class="report-disclaimer">This plan reflects general guidance based on the resources cited above and is not legal, compliance, or professional advice. Pricing, course availability, and policy requirements change — confirm current details with each provider, and consult qualified legal counsel before adopting a governance policy in a regulated industry.</p>
       </section>
 
       <section class="report-section no-print" id="sec-followup">
@@ -703,6 +725,7 @@
       showToast('Add your email first');
       return;
     }
+    trackEvent('lead_captured', { has_org: Boolean(state.lead.org) });
     const subject = `AICAF plan request — ${state.lead.org || state.lead.name || 'New lead'}`;
     const bodyLines = [
       `Name: ${state.lead.name || 'n/a'}`,
@@ -736,13 +759,22 @@
     document.getElementById('wizard').classList.add('hidden');
     const resultsEl = document.getElementById('results');
     resultsEl.classList.add('is-visible');
+    trackEvent('report_generated', {
+      company_size: state.companySize,
+      industry: state.industry,
+      maturity_level: state.maturity,
+    });
     resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   /* ---------------- Print / PDF ---------------- */
-  document.getElementById('print-btn').addEventListener('click', () => window.print());
+  document.getElementById('print-btn').addEventListener('click', () => {
+    trackEvent('report_print_clicked');
+    window.print();
+  });
 
   document.getElementById('pdf-btn').addEventListener('click', () => {
+    trackEvent('report_pdf_download_clicked');
     const el = document.getElementById('report');
     document.body.classList.add('pdf-mode');
     const opt = {
