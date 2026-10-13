@@ -1,5 +1,5 @@
 /* ============================================================
-   AICAF — AI Capability & Adoption Framework
+   AI Workforce Planner (formerly AICAF)
    Tech Partners LLC
    ============================================================ */
 
@@ -1449,3 +1449,11 @@ footer.site-footer {
 .html2pdf__overlay {
   pointer-events: none !important;
 }
+
+/* Free & Oklahoma upskilling block (added 2026.10) */
+.upskill-block{margin-top:28px;padding:20px 22px;border:1px solid rgba(0,0,0,.08);border-radius:10px;background:rgba(0,0,0,.02)}
+.upskill-block h3{margin:0 0 4px}
+.upskill-block__intro{margin:0 0 12px;opacity:.75}
+.upskill-block .resource-link{display:block;margin-bottom:10px}
+.upskill-block .resource-link__meta{display:block;text-decoration:none}
+.upskill-block .resource-link{text-decoration:none}

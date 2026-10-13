@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AICAF — app.js
+   AI Workforce Planner (formerly AICAF) — app.js
    Wizard state, rendering, scoring engine, and report generation.
    ========================================================================== */
 
@@ -468,6 +468,9 @@
     report.roadmap.forEach((r) => r.resources.forEach((res) => {
       if (!seen.has(res.url)) { seen.add(res.url); trainingSources.push(res); }
     }));
+    UPSKILLING_PROGRAMS.forEach((u) => {
+      if (!seen.has(u.url)) { seen.add(u.url); trainingSources.push(u); }
+    });
     report.platforms.forEach((p) => p.tools.forEach((t) => {
       if (!seen.has(t.url)) { seen.add(t.url); platformSources.push(t); }
     }));
@@ -479,8 +482,8 @@
       <div class="report-header">
         <div class="report-header__top">
           <div>
-            <h1>Your AI Capability &amp; Adoption Plan</h1>
-            <span class="report-header__date">Generated ${dateStr} · AICAF v${AICAF_VERSION} · Tech Partners LLC</span>
+            <h1>Your AI Workforce Plan</h1>
+            <span class="report-header__date">Generated ${dateStr} · AI Workforce Planner v${AICAF_VERSION} · Tech Partners LLC</span>
           </div>
           <span class="badge badge--primary">Maturity Level ${report.maturity.id} — ${report.maturity.name}</span>
         </div>
@@ -567,6 +570,11 @@
             </div>`
             )
             .join('')}
+        </div>
+        <div class="upskill-block">
+          <h3>Free &amp; Oklahoma upskilling options</h3>
+          <p class="upskill-block__intro">Low- and no-cost programs your people can start this month, many with credentials they keep.</p>
+          ${UPSKILLING_PROGRAMS.map((u) => `<a class="resource-link" href="${u.url}" target="_blank" rel="noopener">${u.name}<span class="resource-link__meta">${u.provider} · ${u.cost}</span><span class="resource-link__meta">${u.note}</span></a>`).join('')}
         </div>
       </section>
 
@@ -726,7 +734,7 @@
       return;
     }
     trackEvent('lead_captured', { has_org: Boolean(state.lead.org) });
-    const subject = `AICAF plan request — ${state.lead.org || state.lead.name || 'New lead'}`;
+    const subject = `AI Workforce Planner request — ${state.lead.org || state.lead.name || 'New lead'}`;
     const bodyLines = [
       `Name: ${state.lead.name || 'n/a'}`,
       `Organization: ${state.lead.org || 'n/a'}`,
@@ -739,7 +747,7 @@
       `Top priorities: ${state.priorities.map((p) => label(PRIORITIES, p)).join(', ')}`,
       `Top persona: ${report.personaRanking[0].name}`,
       '',
-      'Requesting a follow-up on my AICAF plan generated at this tool.',
+      'Requesting a follow-up on my AI workforce plan generated with the AI Workforce Planner.',
     ];
     const mailto = `mailto:doug.halve@techpartnersllc.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
     window.location.href = mailto;
@@ -779,7 +787,7 @@
     document.body.classList.add('pdf-mode');
     const opt = {
       margin: 0.4,
-      filename: 'AICAF-AI-Training-Plan.pdf',
+      filename: 'AI-Workforce-Plan-Tech-Partners.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },

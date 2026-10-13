@@ -5,7 +5,7 @@
    citation appendix and every inline "resource" link.
    ========================================================================== */
 
-const AICAF_VERSION = '2026.07';
+const AICAF_VERSION = '2026.10';
 
 /* ---------------- Pillar 1: Organization Profile ---------------- */
 
@@ -178,38 +178,50 @@ const CAPABILITY_LEVELS = [
 ];
 
 const TRAINING_RESOURCES = {
+  // Order matters: the report shows the first three per level. Free, certificate-bearing options lead.
   1: [
-    { name: 'OpenAI Academy — AI Foundations', provider: 'OpenAI', cost: 'Free', duration: '60–75 min', url: 'https://help.openai.com/en/articles/20001270-openai-academy-courses' },
+    { name: 'AI Fluency: Framework & Foundations', provider: 'Anthropic Academy', cost: 'Free · certificate', duration: 'Self-paced', url: 'https://anthropic.skilljar.com/' },
+    { name: 'AI Foundations', provider: 'OpenAI Academy', cost: 'Free', duration: '60–75 min', url: 'https://help.openai.com/en/articles/20001270-openai-academy-courses' },
     { name: 'AI Fluency learning path', provider: 'Microsoft Learn', cost: 'Free', duration: '7 modules', url: 'https://learn.microsoft.com/en-us/training/paths/ai-fluency/' },
-    { name: 'Google AI Essentials', provider: 'Coursera', cost: '$49/mo subscription', duration: '< 10 hrs', url: 'https://www.coursera.org/learn/google-ai-essentials' },
-    { name: 'How to Use Generative AI: Building an AI-First Mindset', provider: 'LinkedIn Learning', cost: 'Subscription', duration: '48 min', url: 'https://www.linkedin.com/learning/how-to-use-generative-ai-building-an-ai-first-mindset' },
+    { name: 'AI Skills for America', provider: 'Verizon (with Google, IBM, Microsoft, Anthropic, OpenAI)', cost: 'Free · U.S. adults', duration: '200+ self-paced courses', url: 'https://www.verizon.com/about/responsibility/human-prosperity/workforce-development/ai-learning' },
+    { name: 'Google AI Essentials', provider: 'Google via Coursera', cost: '$49/mo subscription', duration: '< 10 hrs', url: 'https://www.coursera.org/learn/google-ai-essentials' },
   ],
   2: [
     { name: 'Applied AI Foundations', provider: 'OpenAI Academy', cost: 'Free', duration: '75–90 min', url: 'https://help.openai.com/en/articles/20001270-openai-academy-courses' },
-    { name: 'Google Prompting Essentials', provider: 'Coursera', cost: '$49/mo subscription', duration: '< 10 hrs', url: 'https://www.coursera.org/learn/google-prompting-essentials' },
+    { name: 'Claude 101', provider: 'Anthropic Academy', cost: 'Free · certificate', duration: 'Self-paced', url: 'https://anthropic.skilljar.com/' },
+    { name: 'Google Prompting Essentials', provider: 'Google via Coursera', cost: '$49/mo subscription', duration: '< 10 hrs', url: 'https://www.coursera.org/learn/google-prompting-essentials' },
     { name: 'Generative AI for Everyone', provider: 'DeepLearning.AI (Andrew Ng) via Coursera', cost: 'Subscription', duration: '~3 weeks', url: 'https://www.coursera.org/learn/generative-ai-for-everyone' },
     { name: 'Build Your Generative AI Productivity Skills with Microsoft and LinkedIn', provider: 'LinkedIn Learning', cost: 'Subscription', duration: '5 hrs', url: 'https://www.linkedin.com/learning/paths/build-your-generative-ai-productivity-skills-with-microsoft-and-linkedin' },
   ],
   3: [
-    { name: 'Get started with Microsoft 365 Copilot', provider: 'Microsoft Learn', cost: 'Free', duration: '3 modules', url: 'https://learn.microsoft.com/en-us/training/paths/get-started-with-microsoft-365-copilot/' },
+    { name: 'Google AI Professional Certificate', provider: 'Google via Coursera', cost: '$49/mo · free via Oklahoma libraries', duration: '8 courses, ~13 hrs', url: 'https://www.coursera.org/professional-certificates/google-ai' },
     { name: 'Agents and Workflows', provider: 'OpenAI Academy', cost: 'Free', duration: '75–90 min', url: 'https://help.openai.com/en/articles/20001270-openai-academy-courses' },
-    { name: 'Google AI Professional Certificate', provider: 'Coursera', cost: '$49/mo subscription', duration: '7 courses', url: 'https://www.coursera.org/professional-certificates/google-ai' },
-    { name: 'Claude Code in Action', provider: 'Anthropic Academy (Skilljar)', cost: 'n.a.', duration: 'Self-paced', url: 'https://anthropic.skilljar.com/' },
+    { name: 'Get started with Microsoft 365 Copilot', provider: 'Microsoft Learn', cost: 'Free', duration: '3 modules', url: 'https://learn.microsoft.com/en-us/training/paths/get-started-with-microsoft-365-copilot/' },
   ],
   4: [
-    { name: 'AI+HI Specialty Credential', provider: 'SHRM', cost: 'n.a.', duration: 'Labs + capstone', url: 'https://www.shrm.org/credentials/specialty-credentials/ai-hi-specialty-credential' },
-    { name: 'Building an AI-Enabled Workforce (seminar)', provider: 'SHRM', cost: 'n.a.', duration: '6 PDCs', url: 'https://www.shrm.org/events-education/education/seminars/strategy-leadership/building-an-ai-enabled-workforce' },
+    { name: 'AI Leadership', provider: 'OpenAI Academy', cost: 'Free', duration: '~3 hrs', url: 'https://help.openai.com/en/articles/20001270-openai-academy-courses' },
+    { name: 'AI+HI Specialty Credential', provider: 'SHRM', cost: 'Paid · see SHRM', duration: '3 labs + capstone', url: 'https://www.shrm.org/credentials/specialty-credentials/ai-hi-specialty-credential' },
     { name: 'AI for Business Leaders', provider: 'University of Maryland via Coursera', cost: 'Subscription', duration: '6 modules', url: 'https://www.coursera.org/learn/ai-for-business-leaders' },
-    { name: 'AI Strategy for Business Leaders', provider: 'Packt via Coursera', cost: 'Subscription', duration: '12 modules', url: 'https://www.coursera.org/learn/packt-ai-strategy-for-business-leaders-with-chatgpt-ml-dl-uel66' },
+    { name: 'Building an AI-Enabled Workforce (seminar)', provider: 'SHRM', cost: 'Paid · see SHRM', duration: '6 PDCs', url: 'https://www.shrm.org/events-education/education/seminars/strategy-leadership/building-an-ai-enabled-workforce' },
   ],
   5: [
-    { name: 'Agentic AI', provider: 'DeepLearning.AI (Andrew Ng)', cost: '$25–30/mo (Pro)', duration: '9h 55m', url: 'https://www.deeplearning.ai/courses/agentic-ai/' },
+    { name: 'Agentic AI', provider: 'DeepLearning.AI (Andrew Ng)', cost: 'Free to audit · $25–30/mo for certificate', duration: '9h 55m', url: 'https://www.deeplearning.ai/courses/agentic-ai/' },
+    { name: 'Design and Build Agentic Systems', provider: 'OpenAI Academy', cost: 'Free', duration: '110 min', url: 'https://help.openai.com/en/articles/20001270-openai-academy-courses' },
+    { name: 'Claude Code in Action · Building with the Claude API · Intro to MCP', provider: 'Anthropic Academy', cost: 'Free · certificates', duration: 'Self-paced', url: 'https://anthropic.skilljar.com/' },
     { name: 'Develop AI agents on Azure', provider: 'Microsoft Learn', cost: 'Free', duration: '9 modules', url: 'https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure/' },
     { name: 'GitHub Copilot Certification (GH-300)', provider: 'Microsoft Learn / GitHub', cost: 'Proctored exam fee', duration: 'Exam', url: 'https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/' },
-    { name: 'Building with the Claude API', provider: 'Anthropic Academy (Skilljar)', cost: 'n.a.', duration: 'Self-paced', url: 'https://anthropic.skilljar.com/' },
-    { name: 'Introduction to Model Context Protocol', provider: 'Anthropic Academy (Skilljar)', cost: 'n.a.', duration: 'Self-paced', url: 'https://anthropic.skilljar.com/' },
   ],
 };
+
+/* Free and Oklahoma upskilling programs — shown in every report beneath the roadmap.
+   Source: Oklahoma Career Pathways Guide (kept in sync monthly). */
+const UPSKILLING_PROGRAMS = [
+  { name: 'Google AI courses free through Oklahoma libraries', provider: 'Grow with Google · Oklahoma Dept. of Libraries', cost: 'Free with library card', note: 'Free Coursera access to Google Career Certificates, including the Google AI Professional Certificate.', url: 'https://oklahoma.gov/libraries/digital-resources/grow-google.html' },
+  { name: 'TCC Skills Lab: Artificial Intelligence and Data Analytics tracks', provider: 'Tulsa Community College', cost: 'Free', note: 'Residency and Sprint tracks, plus an 8-week work-based option that pays a $1,000 stipend.', url: 'https://skillslab.tulsacc.edu/programs' },
+  { name: 'UpskillOK AI microcredentials', provider: 'Oklahoma State Regents for Higher Education', cost: 'Varies by program', note: 'Stackable, statewide credentials, including AI for office staff (OSU-Tulsa) and prompt engineering for managers (NSU).', url: 'https://upskillok.org/microcredentials/' },
+  { name: 'Greenwood Cyber + AI Lab', provider: 'Microsoft · Black Tech Street (Tulsa)', cost: 'Free', note: 'Public AI-fluency and workforce workshops in Tulsa.', url: 'https://www.prnewswire.com/news-releases/microsoft-and-black-tech-street-launch-greenwood-cyber--ai-lab-in-tulsa-302779672.html' },
+  { name: 'AI Skills for America', provider: 'Verizon', cost: 'Free · U.S. adults', note: '200+ beginner-to-advanced courses with shareable certificates; good for employees and job seekers alike.', url: 'https://www.verizon.com/about/responsibility/human-prosperity/workforce-development/ai-learning' },
+];
 
 /* ---------------- Pillar 5: AI Platform Alignment (by scenario) ---------------- */
 
